@@ -16,3 +16,5 @@ Cargo.lock
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
+example.*
+compile_commands.json
