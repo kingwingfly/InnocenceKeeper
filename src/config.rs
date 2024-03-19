@@ -32,11 +32,14 @@ impl Config {
 
     pub fn add(&mut self, path: PathBuf) -> Result<()> {
         let path = path.canonicalize()?;
+        println!("Add {:?}", path);
         self.list.push(path);
         self.write()
     }
 
     pub fn remove(&mut self, path: PathBuf) -> Result<()> {
+        let path = path.canonicalize()?;
+        println!("Remove {:?}", path);
         self.list.retain(|p| p != &path);
         self.write()
     }
