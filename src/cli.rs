@@ -1,4 +1,4 @@
-use crate::app::App;
+use crate::app::InnocenceKeeper;
 use anyhow::Result;
 use clap::{CommandFactory as _, Parser, Subcommand};
 use std::path::PathBuf;
@@ -27,7 +27,7 @@ pub enum SubCommand {
 impl Cli {
     pub fn run() -> Result<()> {
         let args = Cli::parse();
-        let mut app = App::new();
+        let mut app = InnocenceKeeper::new();
         match args.subcmd {
             SubCommand::Check => app.check()?,
             SubCommand::Run => app.run(),

@@ -11,11 +11,11 @@ const CONFIRM_INFO: [&str; 4] = [
 ];
 
 #[derive(Debug, Default)]
-pub struct App {
+pub struct InnocenceKeeper {
     config: Config,
 }
 
-impl App {
+impl InnocenceKeeper {
     pub fn new() -> Self {
         let config = Config::read().unwrap_or_default();
         Self { config }
