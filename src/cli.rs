@@ -27,17 +27,25 @@ pub enum SubCommand {
 impl Cli {
     pub fn run() -> Result<()> {
         let args = Cli::parse();
-        let mut app = InnocenceKeeper::new();
         match args.subcmd {
-            SubCommand::Check => app.check()?,
-            SubCommand::Run => app.run(),
-            SubCommand::Add { path } => app.add(path)?,
-            SubCommand::Remove { path } => app.remove(path)?,
+            SubCommand::Check => app().check()?,
+            SubCommand::Run => app().run(),
+            SubCommand::Add { path } => app().add(path)?,
+            SubCommand::Remove { path } => app().remove(path)?,
             SubCommand::Completion { shell } => {
                 let mut cmd = Cli::command();
-                clap_complete::generate(shell, &mut cmd, "InnocenceKeeper", &mut std::io::stdout());
+                clap_complete::generate(
+                    shell,
+                    &mut cmd,
+                    "innocence_keeper",
+                    &mut std::io::stdout(),
+                );
             }
         }
         Ok(())
     }
+}
+
+fn app() -> InnocenceKeeper {
+    InnocenceKeeper::new()
 }
