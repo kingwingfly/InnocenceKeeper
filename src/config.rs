@@ -7,22 +7,31 @@ pub struct Config {
     list: Vec<PathBuf>,
 }
 
+pub fn config_path() -> PathBuf {
+    dirs_next::config_dir()
+        .expect("Cannot got your OS' config directory")
+        .join("innocence_keeper.json")
+}
+
 impl Config {
     pub fn read() -> Result<Self> {
+        let config_path = config_path();
         let file = std::fs::OpenOptions::new()
             .read(true)
             .write(true)
             .create(true)
-            .open("test.json")?;
+            .open(&config_path)?;
+        println!("Use config at {:?}", config_path);
         serde_json::from_reader(file).map_err(Into::into)
     }
 
     pub fn write(&self) -> Result<()> {
         let json = serde_json::to_string(self)?;
-        std::fs::write("test.json", json).map_err(Into::into)
+        std::fs::write(config_path(), json).map_err(Into::into)
     }
 
     pub fn add(&mut self, path: PathBuf) -> Result<()> {
+        let path = path.canonicalize()?;
         self.list.push(path);
         self.write()
     }
