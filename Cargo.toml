@@ -1,9 +1,10 @@
 [package]
-description = "This tool removes objects from the file system rather than sending them to the recycle bin. However, for legal compliance reasons, it does not overwrite the disk, so there is still a possibility of data recovery."
 name = "innocence_keeper"
 version = "0.0.1-alpha1"
 edition = "2021"
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+description = "This tool removes objects from the file system rather than sending them to the recycle bin. However, for legal compliance reasons, it does not overwrite the disk, so there is still a possibility of data recovery."
+license = "MIT"
+repository = "https://github.com/kingwingfly/InnocenceKeeper"
 
 [dependencies]
 anyhow = "1.0.81"
@@ -13,3 +14,10 @@ dialoguer = { version = "0.11" }
 serde = { version = "1.0.197", features = ["derive"] }
 serde_json = "1.0.114"
 dirs-next = "2.0.0"
+
+[profile.release]
+lto = true
+opt-level = 3
+codegen-units = 1
+strip = "debuginfo"
+panic = "abort"
