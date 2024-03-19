@@ -1,5 +1,6 @@
 pub mod app;
-mod cli;
+pub mod cli;
 mod config;
 
 pub use app::InnocenceKeeper;
+pub use cli::Cli;

@@ -1,0 +1,22 @@
+name: publish
+
+on:
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install cargo components
+        run: rustup component add clippy
+
+      - name: login to crates.io
+        run: cargo login ${{ secrets.CRATESIO }}
+
+      - name: publish
+        run: cargo test && .github/scripts/publish_test.sh

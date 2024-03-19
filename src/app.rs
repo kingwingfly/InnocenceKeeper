@@ -10,17 +10,20 @@ const CONFIRM_INFO: [&str; 4] = [
     "Last Confirm: Are you really sure to remove the files you configured?",
 ];
 
+/// InnocenceKeeper is a tool to keep your system clean by removing the files you configured.
 #[derive(Debug, Default)]
 pub struct InnocenceKeeper {
     config: Config,
 }
 
 impl InnocenceKeeper {
+    /// Create a new InnocenceKeeper instance.
     pub fn new() -> Self {
         let config = Config::read().unwrap_or_default();
         Self { config }
     }
 
+    /// Check the existence of the files
     pub fn check(&self) -> Result<()> {
         for path in self.config.iter() {
             print!("Checking {:#?} \t... ", path);
@@ -34,6 +37,7 @@ impl InnocenceKeeper {
         Ok(())
     }
 
+    /// Run the removal of the files
     pub fn run(&self) {
         if CONFIRM_INFO
             .iter()
@@ -57,10 +61,12 @@ impl InnocenceKeeper {
         println!("Finish Running");
     }
 
+    /// Add a file to the list
     pub fn add(&mut self, path: PathBuf) -> Result<()> {
         self.config.add(path)
     }
 
+    /// Remove a file from the list
     pub fn remove(&mut self, path: PathBuf) -> Result<()> {
         self.config.remove(path)
     }
