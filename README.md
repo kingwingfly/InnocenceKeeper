@@ -1,6 +1,6 @@
 # Innocence Keeper
 
-A tool to keep your innocence through deleting the NSFW content or files that you configured from your computer.
+A tool to keep your innocence through deleting files that you configured from your computer.
 
 Known as "要留清白在人间" in Chinese, which means "Leave a clean reputation in the world".
 
